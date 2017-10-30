@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lightning Talk - plotting in Python</title>
+    <meta charset="utf-8">
+    <style>
+   @import url(https://fonts.googleapis.com/css?family=Droid+Serif);
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body {
+        font-family: 'Droid Serif';
+      }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: 400;
+        margin-bottom: 0;
+      }
+
+      .image-50 img {
+        width: 50%;
+      }
+
+      .image-30 img {
+        width: 30%;
+      }
+
+      blockquote {
+        border-left: 0.3em solid rgba(0,0,0,0.5);
+        padding: 0 15px;
+        font-style: italic;
+      }
+      .remark-slide-content h1 { font-size: 3em; }
+      .remark-slide-content h2 { font-size: 2em; }
+      .remark-slide-content h3 { font-size: 1.6em; }
+      .footnote {
+        position: absolute;
+        bottom: 3em;
+      }
+      li p { line-height: 1.25em; }
+      .red { color: #fa0000; }
+      .large { font-size: 2em; }
+      a, a > code {
+        color: rgb(249, 38, 114);
+        text-decoration: none;
+      }
+      code {
+        background: #e7e8e2;
+        border-radius: 5px;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-code-line-highlighted     { background-color: #373832; }
+      .pull-left {
+        float: left;
+        width: 47%;
+      }
+      .pull-right {
+        float: right;
+        width: 47%;
+      }
+      .pull-right ~ p {
+        clear: both;
+      }
+      #slideshow .slide .content code {
+        font-size: 0.8em;
+      }
+      #slideshow .slide .content pre code {
+        font-size: 0.9em;
+        padding: 15px;
+      }
+      .inverse {
+        background: #272822;
+        color: #777872;
+        text-shadow: 0 0 20px #333;
+      }
+      .inverse h1, .inverse h2 {
+        color: #f3f3f3;
+        line-height: 0.8em;
+      }
+
+      /* Slide-specific styling */
+      #slide-inverse .footnote {
+        bottom: 12px;
+        left: 20px;
+      }
+      #slide-how .slides {
+        font-size: 0.9em;
+        position: absolute;
+        top:  151px;
+        right: 140px;
+      }
+      #slide-how .slides h3 {
+        margin-top: 0.2em;
+      }
+      #slide-how .slides .first, #slide-how .slides .second {
+        padding: 1px 20px;
+        height: 90px;
+        width: 120px;
+        -moz-box-shadow: 0 0 10px #777;
+        -webkit-box-shadow: 0 0 10px #777;
+        box-shadow: 0 0 10px #777;
+      }
+      #slide-how .slides .first {
+        background: #fff;
+        position: absolute;
+        top: 20%;
+        left: 20%;
+        z-index: 1;
+      }
+      #slide-how .slides .second {
+        position: relative;
+        background: #fff;
+        z-index: 0;
+      }
+
+      /* Two-column layout */
+      .left-column {
+        color: #777;
+        width: 50%;
+        height: 92%;
+        float: left;
+      }
+        .left-column h2:last-of-type, .left-column h3:last-child {
+          color: #000;
+        }
+      .right-column {
+        width: 50%;
+        float: right;
+    
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle, inverse
+
+
+# Go for a month
+David Przybilla 
+
+[github.com/dav009](https://github.com/dav009) 
+
+[@dav009](http://twitter.com/dav009) 
+
+---
+
+# So I started coding in go not so long ago
+--
+
+- specifically around ~1 month ago
+
+--
+
+- I've been doing `scala` + `python` for quite a while
+
+--
+
+- here are the stuff I found a bit strange/different/like and disliked
+
+--
+
+- Sorry, I'm still not a "fan", but I'm having fun learning something new
+
+--
+
+- Sorry for the horrible slides
+
+---
+
+# 🤔 Lets try a toy project
+
+--
+
+# just you know.. to get started
+
+---
+
+## I contribute to some open source projects that use wikipedia
+
+--
+
+
+
+## let's try playing a bit with that
+
+--
+
+- Gonna download the wikipedia dump
+
+--
+
+- and play with regexes in golang
+
+--
+
+- Don't ask why, but I decided to create a big regex 🙈
+
+--
+
+- A big regex like: `[word1 | word2 | word3...word100.000]`
+
+
+---
+
+![](images/ss1.png)
+
+---
+
+![](images/ss2.png)
+
+---
+
+## for some reason I was expecting that to be super fast..
+
+--
+
+### anyway, ended up learning a bunch about:
+ - `runes` and `strings`
+
+--
+
+### at the end of the day speeded up a lot by using tries:
+
+https://github.com/dav009/flash
+
+--
+
+well that was just for fun, nothing really interesting...
+
+---
+
+## From there I faced other challenges
+
+###  Error handling
+
+
+### Dependencies
+
+---
+
+# Dependencies
+
+--
+in python tooling is quite mature
+
+
+--
+
+- my recommendation: use `https://github.com/golang/dep`
+
+--
+
+- checks your code, and import dependencies in it
+
+--
+
+- dependencies are dumped to the `vendors` folder
+
+--
+
+- you don't have to touch it
+
+--
+
+- versioning is expected to be done via github tags
+
+--
+
+---
+
+# Error Handling
+
+--
+ 
+# 😢
+
+--
+
+# 😢 😢 😢 😢
+
+--
+
+---
+
+# it is hard to explain, I will do my best
+
+---
+
+# I like `if err!=nil`
+
+--
+
+- I see many people complaining about this
+
+--
+
+- I like it, I prefer `errors` over `exceptions`
+
+--
+
+- coming from monadic error handling I dislike the pumping tho
+
+--
+
+
+- but I can live with it :)
+
+--
+
+## so what do I really find challenging?
+
+
+---
+
+## I went to my dummy app, and tried to create an http layer
+
+--
+
+## so far Ive been handling errors by retuning them. my app is a terminal bin:
+
+--
+```golang
+something, err = f(a, b)
+if err!=nil{
+  return nil, err
+}
+...
+```
+
+--
+
+- mmm where are the stacktraces?
+
+--
+- 😞 there are no stacktraces
+
+
+--
+
+- googles a bit: finds `pkg/errors`
+- ah this makes sense, I can wrap my errors:
+
+```go
+something, err = f(a, b)
+if err=nil{
+  return nil, errors.Wrap(err, "somthing bad happened when X")
+}
+
+```
+---
+
+# it works well for my terminal bin, I want to see all the stackstrace..
+
+--
+## gonna handle errors in my http layer.
+
+--
+
+## should be easy right? 🤔
+
+--
+## in my http layer, I want to get:
+- `errorA` as a `403`
+- `errorB` as a `404`
+
+
+---
+
+- errors are strings, how do I match them?. ah `errors/pkg` has `Cause()`
+
+--
+
+- for `errors/pkg` errors look a bit like:
+
+--
+
+- `['str,'st', 'str', 'str'.... actualError ]`
+
+--
+- `Cause` gives you the first error from that stack
+
+--
+
+so in your top layer:
+
+- you just have to call `Cause()`
+
+--
+
+- and check that matches your error? 🤔 maybe..
+
+--
+
+- but then you get really low level erros on your top layer..
+--
+
+- it seems clumsy to match them as strings....
+
+
+## GOES TO GOOGLEE.....
+
+
+---
+
+## aha, Dave Cheney has some notes on this:
+
+- https://dave.cheney.net/2016/06/12/stack-traces-and-the-errors-package
+
+- https://dave.cheney.net/2016/04/27/dont-just-check-errors-handle-them-gracefully
+
+--
+
+- now I am really confused, I was doing exactly what dave cheney advocates not to do. `sentinel errors`..
+
+--
+
+```golang
+package A
+var ErrorA = errors.New("my favourite error! ahggg") // sentinel err
+...
+...
+...
+
+package b
+if err == ErrorA {
+
+..
+}
+```
+
+--
+
+## I am confused 😑
+
+---
+
+So there are a few things I want to do (that maybe people dont want to do)
+
+--
+
+- I want to have stackstraces (or maybe not?)
+
+--
+
+- I want to be able to match errors in a sensible way.
+
+--
+
+- I want to divide my application in layers, each layer has its domain
+
+--
+- errors propagated upwards are only the ones defined within the lower layer
+
+--
+
+- example: http layer, I want to display informative error messages without revealing sensible information
+
+--
+
+- I want to log the error with sensible information
+
+--
+
+## lets go to github
+## lets ask on golang slack channel
+
+---
+## Slack answers
+
+
+- https://github.com/ardanlabs/gotraining
+
+- it has its own glue to achieve some (not all of the things I mentioned)
+ 
+
+
+---
+## Github: Aha terraform (hashicorp) has many projects in golang
+
+--
+found two interesting libraries
+
+--
+
+- github.com/hashicorp/errwrap
+
+- https://github.com/hashicorp/go-multierror
+
+--
+
+- Hashicorp projects has many of the things I want 
+
+--
+
+- Looked at other projects, everybody has some flavored implementation of `errors/pkg`
+
+- so many disparate approaches..
+
+---
+
+## errwrap
+
+- it is like `pkg/errors`
+
+--
+
+- it does not provide stackstraces
+
+--
+
+- it lets you stack errors, but they are stored as actual errors, not as just strings.
+
+--
+
+- it lets you match errors in different ways
+
+--
+
+- you can match an error in the stack of errors
+
+--
+
+---
+
+## go-multierror
+
+- it lets you carry a list of errors
+
+--
+
+- it has the semantics that a call can generate multiple errors
+
+--
+
+---
+
+## Also found https://github.com/go-errors/errors
+
+
+- which hashicorp seems to use along `errwrapper`
+
+--
+
+- it has same interface as `errors` (std library)
+
+--
+
+- but it has stackstraces
+
+---
+
+## What I saw inside of some projects looks a bit like
+
+--
+
+```golang
+package internalLayer
+
+errA := Error("A")
+errB := Error("B")
+errC := Error("C")
+
+```
+
+--
+
+```golang
+package upperLayer
+
+func z() {
+
+ a, err := internalservice.F()
+
+  switch err{
+
+    case errA ... do something
+    case errB ... do something
+    ..
+ }
+}
+```
+
+---
+
+## Some suggested me that a more gopher way would be to be :
+
+--
+
+## defensive..
+
+--
+as in:
+
+```
+func z(){
+
+err := internalService.checkPossibleErrA()
+
+if err!=nil { .... } // handle A
+
+err : = internalService.checkForPossibleErrB()
+
+if err!=nil {...} //handle B
+ a, err := internalService.F()
+}
+
+```
+
+---
+
+# Sorry I ran out of time preparing my material
+
+- my point is, `err` handling is really painful
+
+--
+
+- there are lots of tools out there
+
+--
+
+- each project does it verrry differently
+
+--
+
+- probably I am taking the wrong approach
+
+--
+
+- would love to get some feedback
+
+--
+
+
+
+---
+
+
+    </textarea>
+    <script src="remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create({
+        highlightLanguage: 'python',
+        highlightStyle: 'monokai'}
+      );
+
+    </script>
+  </body>
+</html>
